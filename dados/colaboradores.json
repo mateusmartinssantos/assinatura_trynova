@@ -443,7 +443,7 @@
   {
     "id": "9f5e1c7b-3a2d-4e8a-b0c6-7d4a1e9f5404",
     "nome": "Recursos Humanos ",
-    "cargo": "Consultoria Imobiliaria",
+    "cargo": "",
     "area": "",
     "email": "recursoshumanos@trynova.com.br",
     "telefone": "+55 11 4656-5300",
@@ -515,11 +515,11 @@
   {
     "id": "1e7b5c9a-2f4d-4e6a-8c0b-d3f9715a5c12",
     "nome": "Trynova ",
-    "cargo": " ",
-    "area": " ",
+    "cargo": "Consultoria Imobiliaria",
+    "area": "",
     "email": "trynova@trynova.com.br",
     "telefone": "+55 11 4656-5300",
-    "ramal": " "
+    "ramal": ""
   },
   {
     "id": "9e7b5c1a-2f4d-4e6a-8c0b-d3f9715a5d13",
