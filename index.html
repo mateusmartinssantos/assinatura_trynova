@@ -47,7 +47,7 @@
         }
 
         #assinatura {
-            border: 1px dashed #eee;
+            
             padding: 10px;
             display: inline-block;
         }
@@ -132,6 +132,12 @@
 .btn-enviar:hover {
     background: #1659A6;
 }
+.linha-vazia {
+    min-height: 12px;
+    line-height: 12px;
+    display: block;
+}
+
     </style>
 </head>
 
@@ -139,33 +145,36 @@
 
 <div class="container">
     <h2>Assinatura de Email - Trynova</h2>
-
-    <!-- ASSINATURA -->
-    <div class="card" id="assinaturaCard" style="display:none;">
-     <button id="btnCopiar" onclick="copiarAssinatura()">
-             Copiar assinatura para o Outlook
-        </button>
-        <button id="btnBaixar" onclick="baixarAssinatura()" style="background: #555; margin-left: 10px;">
+  <button id="btnBaixar" onclick="baixarAssinatura()" style="background: #555; margin-left: 10px;">
             Baixar como Imagem (PNG)
         </button>
+      
         <p id="msgCopiado" style="display:none; font-size:13px; color:#28a745; font-weight:bold;">
             ✔️ Assinatura copiada! Siga as instruções abaixo para colar no Outlook.
         </p>
 
+    <!-- ASSINATURA -->
+    <div class="card" id="assinaturaCard" style="display:none;">
+ 
+      
 
-        <div id="assinatura">
+        <div id="assinatura" style="
+    position: relative;
+    width: 400px;
+    padding-right: 290px; /* espaço reservado para a imagem */
+">
            <table cellpadding="0" cellspacing="0" style="font-family: 'Red Hat Display', sans-serif;">
     <tr>
         <td style="padding-right:20px; vertical-align:top;">
-            <img src="https://mateusmartinssantos.github.io/assinatura_trynova/imagens/logo.png" width="140" alt="Trynova" style="display:block;">
+            <img src="imagens/logo.png" width="140" alt="Trynova" style="display:block;">
         </td>
 
         <td style="padding-left:8px; padding-top:2px; vertical-align:top; padding-right: 10px;">
             <p style="margin:0; font-size:18px; font-weight:bold; color:#1659A6; text-transform:uppercase;">
-                <span id="p_nome"></span>
+                <span id="p_nome"style="white-space: nowrap; "></span>
             </p>
             <p style="margin:2px 0 8px 0; font-size:12px; font-weight:bold; color:#24325A;">
-                <span id="p_cargo"></span><br>
+                <span id="p_cargo" style=" white-space:nowrap;"></span><br>
                 <span style="white-space: nowrap;" id="p_area"></span>
             </p>
             <p style="margin:0; font-size:12px; color:#666; line-height:1.3;">
@@ -173,17 +182,26 @@
                 <span id="p_telefone"></span><span id="p_ramal"></span>
             </p>
             <p style="margin:6px 0 0 0; font-size:12px; color:#666;">
-                 <a href="https://www.trynova.com.br" style="color: #666; text-decoration: none;">www.trynova.com.br</a><br>
+                www.trynova.com.br<br>
                 <strong style="white-space: nowrap;">TRYNOVA Consultoria Imobiliária</strong>
             </p>
         </td>
 
-        <td style="padding-left:8px; vertical-align: bottom; padding-bottom: 8px;">
-            <div style="height: 5px; line-height: 5px; font-size: 1px;">&nbsp;</div>
-            <img src="https://mateusmartinssantos.github.io/assinatura_trynova/imagens/32.png" width="300" alt="Trynova" style="display:block;">
-        </td>
     </tr>
 </table>
+<img
+    src="imagens/32.png"
+    width="300"
+    alt="Trynova"
+    style="
+       position: absolute;
+        top: 14px;
+        right: 10px;
+        z-index: 1;
+        pointer-events: none;
+    "
+>
+
         </div>
     </div>  
         
@@ -199,7 +217,7 @@
         <li>Se editar a assinatura,apague a imagem  anterior antes de colar a nova assinatura</li>
         <li>Cole a assinatura usando <strong>Ctrl + V</strong></li>
         <li>Clique em <strong>OK</strong> para salvar</li>
-        
+
     </ol>
 
     <p style="font-size:13px; color:#b45309; margin-top:10px;">
@@ -230,9 +248,41 @@
 
     
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
 
 <script>
+    async function gerarTodas() {
+    const zip = new JSZip();
+    const response = await fetch("dados/colaboradores.json");
+    const colaboradores = await response.json();
+
+    for (const c of colaboradores) {
+        // Preenche dados
+        p_nome.innerText = c.nome;
+        p_cargo.innerText = c.cargo;
+        p_area.innerText = c.area;
+        p_email.innerText = c.email;
+        p_telefone.innerText = c.telefone;
+        p_ramal.innerText = c.ramal ? ` | Ramal ${c.ramal}` : "";
+
+        await new Promise(r => setTimeout(r, 150)); // garante render
+
+        const canvas = await html2canvas(document.getElementById("assinatura"), {
+            scale: 2,
+            backgroundColor: "#ffffff",
+            useCORS: true
+        });
+
+        const base64 = canvas.toDataURL("image/png").split(",")[1];
+        zip.file(`assinatura-${c.nome.replace(/\s+/g, "_")}.png`, base64, { base64: true });
+    }
+
+    const content = await zip.generateAsync({ type: "blob" });
+    saveAs(content, "assinaturas-trynova.zip");
+}
     async function baixarAssinatura() {
     const assinatura = document.getElementById("assinatura");
     const btn = document.getElementById("btnBaixar");
@@ -255,7 +305,21 @@
         setTimeout(() => { btn.innerText = "🖼️ Baixar como Imagem (PNG)"; }, 3000);
     });
 }
+function preencherCampo(idElemento, valor) {
+    const el = document.getElementById(idElemento);
+
+    if (valor && valor.trim() !== "") {
+        el.innerText = valor;
+        el.classList.remove("linha-vazia");
+    } else {
+        el.innerHTML = "&nbsp;";
+        el.classList.add("linha-vazia");
+    }
+}
+
 async function carregarDados() {
+   
+
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
 
@@ -276,8 +340,8 @@ async function carregarDados() {
         }
 
         document.getElementById("p_nome").innerText = colaborador.nome;
-        document.getElementById("p_cargo").innerText = colaborador.cargo;
-        document.getElementById("p_area").innerText = colaborador.area;
+        preencherCampo("p_cargo", colaborador.cargo);
+        preencherCampo("p_area", colaborador.area); 
         document.getElementById("p_email").innerText = colaborador.email;
         document.getElementById("p_telefone").innerText = colaborador.telefone;
         document.getElementById("p_ramal").innerText = colaborador.ramal ? ` | Ramal ${colaborador.ramal}` : "";
@@ -289,6 +353,7 @@ async function carregarDados() {
         console.error(e);
         mostrarErro();
     }
+     
 }
 
 function copiarAssinatura() {
