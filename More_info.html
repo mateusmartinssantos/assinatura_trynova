@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <meta name="robots" content="noindex, nofollow">
+
+    <meta charset="UTF-8">
+    <title>Assinatura de Email - Trynova</title>
+
+    <style>
+        body {
+            font-family: 'Red Hat Display', 'Segoe UI', Arial, Helvetica, sans-serif;
+            background: #f4f4f4;
+            padding: 40px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .card {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+        }
+
+        button {
+            background: #1b4fa3;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        button:hover {
+            background: #0d3d8a;
+        }
+
+        #assinatura {
+            
+            padding: 10px;
+            display: inline-block;
+        }
+
+        ol {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .erro {
+            color: #dc3545;
+            text-align: center;
+            font-weight: bold;
+        }
+        /* Estilo do Card de Feedback */
+.feedback-section {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.feedback-section h3 {
+    color: #1659A6;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Estrutura do Formulário */
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-group label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #24325A;
+}
+
+/* Estilo dos Campos de Entrada */
+.feedback-form input, 
+.feedback-form textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.feedback-form input:focus, 
+.feedback-form textarea:focus {
+    outline: none;
+    border-color: #1659A6;
+    box-shadow: 0 0 0 3px rgba(22, 89, 166, 0.1);
+}
+
+/* Botão de Envio Personalizado */
+.btn-enviar {
+    background: #24325A;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 10px;
+}
+
+.btn-enviar:hover {
+    background: #1659A6;
+}
+.linha-vazia {
+    min-height: 12px;
+    line-height: 12px;
+    display: block;
+}
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Assinatura de Email - Trynova</h2>
+  <button id="btnBaixar" onclick="baixarAssinatura()" style="background: #555; margin-left: 10px;">
+            Baixar como Imagem (PNG)
+        </button>
+      
+        <p id="msgCopiado" style="display:none; font-size:13px; color:#28a745; font-weight:bold;">
+            ✔️ Assinatura copiada! Siga as instruções abaixo para colar no Outlook.
+        </p>
+
+    <!-- ASSINATURA -->
+    <div class="card" id="assinaturaCard" style="display:none;">
+ 
+      
+
+        <div id="assinatura" style="
+    position: relative;
+    width: 400px;
+    padding-right: 290px; /* espaço reservado para a imagem */
+">
+           <table cellpadding="0" cellspacing="0" style="font-family: 'Red Hat Display', sans-serif;">
+    <tr>
+        <td style="padding-right:20px; vertical-align:top;">
+            <img src="imagens/logo.png" width="140" alt="Trynova" style="display:block;">
+        </td>
+
+        <td style="padding-left:8px; padding-top:2px; vertical-align:top; padding-right: 10px;">
+            <p style="margin:0; font-size:18px; font-weight:bold; color:#1659A6; text-transform:uppercase;">
+                <span id="p_nome"style="white-space: nowrap; "></span>
+            </p>
+            <p style="margin:2px 0 8px 0; font-size:12px; font-weight:bold; color:#24325A;">
+                <span id="p_cargo" style=" white-space:nowrap;"></span><br>
+                <span style="white-space: nowrap;" id="p_area"></span>
+            </p>
+            <p style="margin:0; font-size:12px; color:#666; line-height:1.3;">
+                <span id="p_email"></span><br>
+                <span id="p_telefone"></span><span id="p_ramal"></span><br>
+                 <span id="p_celular"></span><span id="p_celular"></span>
+            </p>
+            <p style="margin:6px 0 0 0; font-size:12px; color:#666;">
+                www.trynova.com.br<br>
+                <strong style="white-space: nowrap;">TRYNOVA Consultoria Imobiliária</strong>
+            </p>
+        </td>
+
+    </tr>
+</table>
+<img
+    src="imagens/32.png"
+    width="300"
+    alt="Trynova"
+    style="
+       position: absolute;
+        top: 32px;
+        right: 10px;
+        z-index: 1;
+        pointer-events: none;
+    "
+>
+
+        </div>
+    </div>  
+        
+    <!-- PASSO A PASSO -->
+<div class="card" id="passos" style="display:none;">
+    <h3>Como configurar sua assinatura no Outlook</h3>
+
+    <ol>
+        <li>Clique em <strong>“Copiar assinatura para o Outlook ou baixar como Imagem”</strong></li>
+        <li>Abra o <strong>Outlook</strong></li>
+        <li>Acesse <strong>Arquivo → Opções → Email → Assinaturas</strong></li>
+        <li>Crie uma nova assinatura ou edite uma existente</li>
+        <li>Se editar a assinatura,apague a imagem  anterior antes de colar a nova assinatura</li>
+        <li>Cole a assinatura usando <strong>Ctrl + V</strong></li>
+        <li>Clique em <strong>OK</strong> para salvar</li>
+
+    </ol>
+
+    <p style="font-size:13px; color:#b45309; margin-top:10px;">
+        ⚠️ Importante: cole a assinatura diretamente no editor do Outlook.  
+        Não utilize Word, WhatsApp ou Bloco de Notas antes.</br>
+        Caso a apareça um erro de assinatura inválida, aperte Ctrl + F5 para atualizar a pagina e limpar o cache
+    </p>
+    <h3>Elogios ou Sugestões</h3>
+    <p class="subtitle">Sua opinião ajuda a melhorar nossas ferramentas internas.</p>
+        <form action="https://formspree.io/f/xdaanbdk" method="POST" class="feedback-form">
+        <div class="input-group">
+            <label for="email">Seu e-mail corporativo:</label>
+            <input type="email" id="email" name="email" placeholder="nome@trynova.com.br" required>
+        </div>
+
+        <div class="input-group">
+            <label for="message">Sua mensagem:</label>
+            <textarea id="message" name="message" rows="4" placeholder="Escreva aqui seu elogio ou sugestão..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-enviar">🚀 Enviar Feedback</button>
+    </form>
+</div>
+    <!-- ERRO -->
+    <div class="card erro" id="erro" style="display:none;">
+        ❌ Link inválido ou assinatura não encontrada
+    </div>
+
+    
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+
+<script>
+    async function gerarTodas() {
+    const zip = new JSZip();
+    const response = await fetch("dados/colaboradores.json");
+    const colaboradores = await response.json();
+
+    for (const c of colaboradores) {
+        // Preenche dados
+        p_nome.innerText = c.nome;
+        p_cargo.innerText = c.cargo;
+        p_area.innerText = c.area;
+        p_email.innerText = c.email;
+        p_telefone.innerText = c.telefone;
+        p_ramal.innerText = c.ramal ? ` | Ramal ${c.ramal}` : "";
+
+        await new Promise(r => setTimeout(r, 150)); // garante render
+
+        const canvas = await html2canvas(document.getElementById("assinatura"), {
+            scale: 2,
+            backgroundColor: "#ffffff",
+            useCORS: true
+        });
+
+        const base64 = canvas.toDataURL("image/png").split(",")[1];
+        zip.file(`assinatura-${c.nome.replace(/\s+/g, "_")}.png`, base64, { base64: true });
+    }
+
+    const content = await zip.generateAsync({ type: "blob" });
+    saveAs(content, "assinaturas-trynova.zip");
+}
+    async function baixarAssinatura() {
+    const assinatura = document.getElementById("assinatura");
+    const btn = document.getElementById("btnBaixar");
+    
+    btn.innerText = "⏳ Gerando...";
+    
+    // html2canvas transforma a DIV em um elemento Canvas
+    html2canvas(assinatura, {
+        useCORS: true, // Permite carregar imagens de outros domínios (GitHub)
+        scale: 2,      // Melhora a qualidade da imagem (Retina)
+        backgroundColor: "#ffffff"
+    }).then(canvas => {
+        // Converte o canvas para um link de download
+        const link = document.createElement('a');
+        link.download = `assinatura-${document.getElementById("p_nome").innerText}.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
+        
+        btn.innerText = "✔️ Imagem Baixada";
+        setTimeout(() => { btn.innerText = "🖼️ Baixar como Imagem (PNG)"; }, 3000);
+    });
+}
+function preencherCampo(idElemento, valor) {
+    const el = document.getElementById(idElemento);
+
+    if (valor && valor.trim() !== "") {
+        el.innerText = valor;
+        el.classList.remove("linha-vazia");
+    } else {
+        el.innerHTML = "&nbsp;";
+        el.classList.add("linha-vazia");
+    }
+}
+
+async function carregarDados() {
+   
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    if (!id) {
+        mostrarErro();
+        return;
+    }
+
+    try {
+        const response = await fetch("dados/colaboradores.json");
+        const colaboradores = await response.json();
+
+        const colaborador = colaboradores.find(c => c.id === id);
+
+        if (!colaborador) {
+            mostrarErro();
+            return;
+        }
+
+        document.getElementById("p_nome").innerText = colaborador.nome;
+        preencherCampo("p_cargo", colaborador.cargo);
+        preencherCampo("p_area", colaborador.area); 
+        document.getElementById("p_email").innerText = colaborador.email;
+        document.getElementById("p_telefone").innerText = colaborador.telefone;
+         document.getElementById("p_celular").innerText = colaborador.celular;
+        document.getElementById("p_ramal").innerText = colaborador.ramal ? ` | Ramal ${colaborador.ramal}` : "";
+
+        document.getElementById("assinaturaCard").style.display = "block";
+        document.getElementById("passos").style.display = "block";
+
+    } catch (e) {
+        console.error(e);
+        mostrarErro();
+    }
+     
+}
+
+function copiarAssinatura() {
+    const assinatura = document.getElementById("assinatura");
+    const range = document.createRange();
+    range.selectNode(assinatura);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+
+    try {
+        document.execCommand("copy");
+
+        document.getElementById("msgCopiado").style.display = "block";
+        document.getElementById("btnCopiar").innerText = "✔️ Assinatura copiada";
+        document.getElementById("btnCopiar").style.background = "#28a745";
+
+    } catch (err) {
+        alert("Não foi possível copiar a assinatura. Tente novamente.");
+    }
+
+    window.getSelection().removeAllRanges();
+}
+
+function mostrarErro() {
+    document.getElementById("erro").style.display = "block";
+}
+
+carregarDados();
+</script>
+
+</body>
+</html>
