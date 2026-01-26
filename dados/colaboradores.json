@@ -499,10 +499,20 @@
   {
     "id": "c1a9e7b5-2f4d-4e6a-8c0b-d3f9715a6016",
     "nome": "Yasmin Oliveira",
-    "cargo": "Assistente Técnico II",
+    "cargo": "Analista Técnico I",
     "area": "DESENVOLVIMENTO IMOBILIÁRIO | Estudos e Expansões",
     "email": "yasmin.oliveira@trynova.com.br",
     "telefone": "+55 11 4656-5300",
     "ramal": "325"
+  },
+    {
+    "id": "8c71c9e8-5582-4df6-b046-77ab44bd5122",
+    "nome": "Ana Carolina Moraes",
+    "cargo": "Assistente Técnico II",
+    "area": "GESTÃO PATRIMONIAL | Renovações",
+    "email": "anacaroline.moraes@trynova.com.br",
+    "telefone": "+55 11 4656-5300",
+    "ramal": "231"
   }
+  
 ]
