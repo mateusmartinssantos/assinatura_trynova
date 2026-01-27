@@ -524,5 +524,16 @@
     "telefone": "+55 11 4656-5300",
     "ramal": "240"
   }
+    ,
+    {
+    "id": "90421f6c-ce81-4779-8c1b-5283db07d231",
+    "nome": "DEPARTAMENTO PESSOAL",
+    "cargo": "Laís Correa",
+    "area": "Analista Administrativo II",
+    "email": "departamentopessoal@trynova.com.br",
+    "telefone": "+55 11 4656-5300",
+    "ramal": "241"
+     }
+  
   
 ]
