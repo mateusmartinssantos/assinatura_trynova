@@ -533,7 +533,29 @@
     "email": "departamentopessoal@trynova.com.br",
     "telefone": "+55 11 4656-5300",
     "ramal": "241"
+     } ,
+    {
+    "id": "b240644f-d2e9-4f6a-9207-f8e70a4d38ac",
+    "nome": "TRYNOVA",
+    "cargo": "Juliana Yamagi",
+    "area": "Diretora Financeiro",
+    "email": "trynova@trynova.com.br",
+    "telefone": "+55 11 4656-5300",
+    "ramal": "248"
+     } ,
+    {
+    "id": "09a767ce-97f3-4a0f-8ffa-7fb46e03c84f",
+    "nome": "CONTAS A PAGAR",
+    "cargo": "Juliana Yamagi",
+    "area": "Diretora Financeiro",
+    "email": "trynova@trynova.com.br",
+    "telefone": "+55 11 4656-5300",
+    "ramal": "248"
      }
   
+
+
+
+ 
   
 ]
